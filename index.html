@@ -248,10 +248,18 @@
             text-decoration: underline;
         }
 
-        /* Teaching & Awards Section (formerly Awards) */
+        /* Teaching & Leadership Section (formerly Awards) */
         .awards-section {
             background: #f5f5f5;
         }
+
+        /* Teaching & Leadership Grid */
+        .awards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
 
         .awards-container {
             max-width: 800px;
@@ -533,39 +541,40 @@
             </div>
         </section>
 
-        <!-- Teaching Section -->
-        <section id="presentations" class="section awards-section">
-            <div class="awards-container">
-                <h2>Teaching & Leadership</h2>
-                <div class="awards-list">
-                    <div class="award-box">
-                        <h3>Physics Tutor</h3>
-                        <p class="organization">Academic Excellence</p>
-                        <p class="date">Fall 2023 – Spring 2025</p>
-                        <p>Tutored students in core physics courses including Electromagnetic Theory, Mechanics, and Relativity.</p>
-                    </div>
-
-                    <div class="award-box">
-                        <h3>Algorithms Grader & Tutor</h3>
-                        <p class="organization">Computer Science Department</p>
-                        <p class="date">Spring 2025</p>
-                        <p>Graded and tutored for Algorithms course.</p>
-                    </div>
-
-                    <div class="award-box">
-                        <h3>The Muddraker (College Newspaper)</h3>
-                        <p class="organization">Harvey Mudd College</p>
-                        <p class="date">Aug 2022 – May 2025</p>
-                        <p>Co-Editor-in-Chief, Senior Advisor</p>
-                    </div>
-
-                    <div class="award-box">
-                        <h3>Other Involvements</h3>
-                        <p>Women in Physics Mentor, Diversity Director, Task Force for Clinic Partnerships, Dorm Mentor, Girl Scouts, Robotics.</p>
-                    </div>
-                </div>
+        <!-- Teaching & Leadership Section -->
+<section id="teaching" class="section awards-section">
+    <div class="awards-container">
+        <h2>Teaching & Leadership</h2>
+        <div class="awards-grid">
+            <div class="award-box">
+                <h3>Physics Tutor</h3>
+                <p class="organization">Academic Excellence</p>
+                <p class="date">Fall 2023 – Spring 2025</p>
+                <p>Tutored students in core physics courses including Electromagnetic Theory, Mechanics, and Relativity.</p>
             </div>
-        </section>
+
+            <div class="award-box">
+                <h3>Algorithms Grader & Tutor</h3>
+                <p class="organization">Computer Science Department</p>
+                <p class="date">Spring 2025</p>
+                <p>Graded and tutored for Algorithms course.</p>
+            </div>
+
+            <div class="award-box">
+                <h3>The Muddraker (College Newspaper)</h3>
+                <p class="organization">Harvey Mudd College</p>
+                <p class="date">Aug 2022 – May 2025</p>
+                <p>Co-Editor-in-Chief, Senior Advisor</p>
+            </div>
+
+            <div class="award-box">
+                <h3>Other Involvements</h3>
+                <p>Women in Physics Mentor, Diversity Director, Task Force for Clinic Partnerships, Dorm Mentor, Girl Scouts, Robotics.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
 
         <!-- Contact Section -->
         <section id="contact" class="section contact-section">
