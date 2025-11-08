@@ -12,76 +12,41 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
-            line-height: 1.8;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            line-height: 1.7;
             color: #333;
             background: #fff;
         }
 
-        /* Header Banner */
+        /* Header with Navigation */
         header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 20px 20px;
-            text-align: center;
+            padding: 30px 20px 0;
         }
 
-        .header-content {
-            max-width: 800px;
+        .header-top {
+            max-width: 900px;
             margin: 0 auto;
-        }
-
-        .profile-img {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 20px;
-            border: 4px solid white;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            text-align: center;
+            padding-bottom: 20px;
         }
 
         h1 {
             font-size: 2.5rem;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             font-weight: 600;
         }
 
-        .tagline {
-            font-size: 1.1rem;
+        .subtitle {
+            font-size: 1.05rem;
             opacity: 0.95;
-            margin-bottom: 25px;
         }
 
-        .social-links {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .social-links a {
-            color: white;
-            text-decoration: none;
-            padding: 8px 20px;
-            border: 2px solid white;
-            border-radius: 25px;
-            transition: all 0.3s;
-            font-size: 0.95rem;
-        }
-
-        .social-links a:hover {
-            background: white;
-            color: #667eea;
-        }
-
-        /* Navigation */
+        /* Navigation Tabs */
         nav {
-            position: sticky;
-            top: 0;
-            background: white;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            z-index: 100;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
         }
 
         .nav-container {
@@ -89,7 +54,6 @@
             margin: 0 auto;
             display: flex;
             justify-content: center;
-            padding: 0;
         }
 
         .nav-menu {
@@ -105,8 +69,8 @@
 
         .nav-menu a {
             display: block;
-            padding: 18px 25px;
-            color: #333;
+            padding: 15px 25px;
+            color: white;
             text-decoration: none;
             transition: all 0.3s;
             font-weight: 500;
@@ -115,23 +79,99 @@
 
         .nav-menu a:hover,
         .nav-menu a.active {
-            color: #667eea;
-            border-bottom-color: #667eea;
-            background: #f8f9fa;
+            background: rgba(255, 255, 255, 0.25);
+            border-bottom-color: white;
         }
 
         /* Main Content */
         main {
             max-width: 900px;
             margin: 0 auto;
-            padding: 60px 20px;
+            padding: 50px 20px;
         }
 
         section {
-            margin-bottom: 80px;
-            scroll-margin-top: 80px;
+            display: none;
+            animation: fadeIn 0.5s;
         }
 
+        section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* About Section */
+        #about {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+        }
+
+        #about.active {
+            display: flex;
+        }
+
+        .profile-container {
+            flex-shrink: 0;
+        }
+
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            color: #667eea;
+            text-decoration: none;
+            padding: 6px 16px;
+            border: 1.5px solid #667eea;
+            border-radius: 20px;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .social-links a:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .about-content {
+            flex: 1;
+        }
+
+        .about-content p {
+            font-size: 1.05rem;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .about-content a {
+            color: #667eea;
+            text-decoration: none;
+            border-bottom: 1px solid #667eea;
+        }
+
+        .about-content a:hover {
+            color: #764ba2;
+            border-bottom-color: #764ba2;
+        }
+
+        /* Section Titles */
         h2 {
             font-size: 2rem;
             margin-bottom: 30px;
@@ -141,49 +181,9 @@
             padding-bottom: 10px;
         }
 
-        /* About Section */
-        #about p {
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            text-align: justify;
-        }
-
-        #about a {
-            color: #667eea;
-            text-decoration: none;
-            border-bottom: 1px solid #667eea;
-        }
-
-        #about a:hover {
-            color: #764ba2;
-            border-bottom-color: #764ba2;
-        }
-
-        /* Education Section */
-        .education-item {
-            margin-bottom: 35px;
-        }
-
-        .education-item h3 {
-            font-size: 1.3rem;
-            color: #2c3e50;
-            margin-bottom: 5px;
-        }
-
-        .institution {
-            color: #7f8c8d;
-            font-size: 1.05rem;
-            margin-bottom: 5px;
-        }
-
-        .date {
-            color: #95a5a6;
-            font-style: italic;
-        }
-
         /* Publications Section */
         .publication-item {
-            margin-bottom: 40px;
+            margin-bottom: 35px;
             padding-bottom: 30px;
             border-bottom: 1px solid #ecf0f1;
         }
@@ -193,16 +193,17 @@
         }
 
         .publication-item h3 {
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             color: #2c3e50;
             margin-bottom: 10px;
-            line-height: 1.4;
+            line-height: 1.5;
+            font-weight: 600;
         }
 
         .authors {
             color: #555;
-            margin-bottom: 8px;
-            font-size: 1rem;
+            margin-bottom: 5px;
+            font-size: 0.95rem;
         }
 
         .authors strong {
@@ -212,32 +213,25 @@
         .venue {
             color: #7f8c8d;
             font-style: italic;
-            margin-bottom: 12px;
-            font-size: 0.95rem;
-        }
-
-        .abstract {
-            color: #666;
-            margin-top: 12px;
-            font-size: 0.98rem;
-            line-height: 1.6;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
         }
 
         .publication-links {
             display: flex;
-            gap: 12px;
-            margin-top: 12px;
+            gap: 10px;
+            margin-top: 10px;
             flex-wrap: wrap;
         }
 
         .publication-links a {
             color: #667eea;
             text-decoration: none;
-            padding: 5px 15px;
+            padding: 4px 14px;
             border: 1.5px solid #667eea;
             border-radius: 4px;
             transition: all 0.3s;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         .publication-links a:hover {
@@ -247,7 +241,7 @@
 
         /* Experience Section */
         .experience-item {
-            margin-bottom: 40px;
+            margin-bottom: 35px;
             padding-bottom: 30px;
             border-bottom: 1px solid #ecf0f1;
         }
@@ -257,30 +251,61 @@
         }
 
         .experience-item h3 {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             color: #2c3e50;
             margin-bottom: 5px;
+            font-weight: 600;
         }
 
         .company {
             color: #7f8c8d;
-            font-size: 1.05rem;
-            margin-bottom: 5px;
+            font-size: 1rem;
+            margin-bottom: 3px;
+        }
+
+        .date {
+            color: #95a5a6;
+            font-size: 0.9rem;
+            margin-bottom: 12px;
         }
 
         .experience-item ul {
-            margin-top: 15px;
+            margin-top: 12px;
             padding-left: 20px;
         }
 
         .experience-item li {
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             color: #555;
+            font-size: 0.98rem;
+        }
+
+        /* Education Section */
+        .education-item {
+            margin-bottom: 30px;
+        }
+
+        .education-item h3 {
+            font-size: 1.2rem;
+            color: #2c3e50;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .institution {
+            color: #7f8c8d;
+            font-size: 1rem;
+            margin-bottom: 3px;
+        }
+
+        .education-details {
+            color: #95a5a6;
+            font-size: 0.9rem;
         }
 
         /* Projects Section */
         .project-item {
-            margin-bottom: 40px;
+            margin-bottom: 35px;
             padding-bottom: 30px;
             border-bottom: 1px solid #ecf0f1;
         }
@@ -290,37 +315,39 @@
         }
 
         .project-item h3 {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             color: #2c3e50;
             margin-bottom: 10px;
+            font-weight: 600;
         }
 
         .project-description {
             color: #555;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
+            font-size: 0.98rem;
             line-height: 1.6;
         }
 
         .tech-stack {
             color: #7f8c8d;
-            font-size: 0.95rem;
-            margin-bottom: 12px;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
         }
 
         .project-links {
             display: flex;
-            gap: 12px;
+            gap: 10px;
             flex-wrap: wrap;
         }
 
         .project-links a {
             color: #667eea;
             text-decoration: none;
-            padding: 5px 15px;
+            padding: 4px 14px;
             border: 1.5px solid #667eea;
             border-radius: 4px;
             transition: all 0.3s;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         .project-links a:hover {
@@ -331,10 +358,11 @@
         /* Footer */
         footer {
             background: #f8f9fa;
-            padding: 30px 20px;
+            padding: 25px 20px;
             text-align: center;
             color: #7f8c8d;
             margin-top: 60px;
+            font-size: 0.9rem;
         }
 
         /* Responsive */
@@ -353,6 +381,24 @@
                 font-size: 0.9rem;
             }
 
+            #about {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .profile-img {
+                width: 180px;
+                height: 180px;
+            }
+
+            .about-content {
+                text-align: center;
+            }
+
+            .about-content p {
+                text-align: left;
+            }
+
             h2 {
                 font-size: 1.6rem;
             }
@@ -364,54 +410,59 @@
     </style>
 </head>
 <body>
-    <!-- Header Banner -->
+    <!-- Header with Name and Navigation -->
     <header>
-        <div class="header-content">
-            <img src="profile.jpg" alt="Your Name" class="profile-img">
+        <div class="header-top">
             <h1>Your Name</h1>
-            <p class="tagline">PhD Student in Computer Science | University Name</p>
-            <div class="social-links">
-                <a href="mailto:your.email@university.edu">Email</a>
-                <a href="https://scholar.google.com/citations?user=YOUR_ID">Google Scholar</a>
-                <a href="https://github.com/yourusername">GitHub</a>
-                <a href="https://linkedin.com/in/yourusername">LinkedIn</a>
-                <a href="cv.pdf">CV</a>
+            <p class="subtitle">PhD Student in Computer Science | University Name</p>
+        </div>
+        
+        <!-- Navigation Tabs -->
+        <nav>
+            <div class="nav-container">
+                <ul class="nav-menu">
+                    <li><a href="#about" class="nav-link active">About</a></li>
+                    <li><a href="#publications" class="nav-link">Publications</a></li>
+                    <li><a href="#experience" class="nav-link">Experience</a></li>
+                    <li><a href="#projects" class="nav-link">Projects</a></li>
+                    <li><a href="#education" class="nav-link">Education</a></li>
+                </ul>
             </div>
-        </div>
+        </nav>
     </header>
-
-    <!-- Sticky Navigation -->
-    <nav>
-        <div class="nav-container">
-            <ul class="nav-menu">
-                <li><a href="#about" class="active">About</a></li>
-                <li><a href="#publications">Publications</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#education">Education</a></li>
-            </ul>
-        </div>
-    </nav>
 
     <!-- Main Content -->
     <main>
         <!-- About Section -->
-        <section id="about">
-            <h2>About</h2>
-            <p>
-                I am a third year Computer Science PhD student at <a href="https://university.edu">University Name</a> 
-                advised by <a href="https://advisor-website.com">Professor Name</a>. I am interested in AI for precision health. 
-                I am supported by the University Graduate Fellowship and the NSF Graduate Research Fellowship.
-            </p>
-            <p>
-                My research focuses on developing machine learning methods for healthcare applications, with a particular emphasis 
-                on personalized medicine and clinical decision support systems. I work at the intersection of computer science, 
-                statistics, and medicine to create tools that can improve patient outcomes.
-            </p>
-            <p>
-                Previously, I completed my undergraduate degree at University Name where I worked on natural language processing 
-                and healthcare informatics. I have also interned at leading research labs and tech companies.
-            </p>
+        <section id="about" class="active">
+            <div class="profile-container">
+                <img src="profile.jpg" alt="Your Name" class="profile-img">
+                <div class="social-links">
+                    <a href="mailto:your.email@university.edu">Email</a>
+                    <a href="https://scholar.google.com/citations?user=YOUR_ID">Scholar</a>
+                    <a href="https://github.com/yourusername">GitHub</a>
+                    <a href="https://linkedin.com/in/yourusername">LinkedIn</a>
+                    <a href="cv.pdf">CV</a>
+                </div>
+            </div>
+            
+            <div class="about-content">
+                <p>
+                    I am a third year Computer Science PhD student at <a href="https://stanford.edu">Stanford University</a> 
+                    advised by <a href="https://www.james-zou.com">James Zou</a>. I am interested in AI for precision health. 
+                    I am supported by the Stanford Graduate Fellowship and the NSF Graduate Research Fellowship.
+                </p>
+                <p>
+                    My research focuses on developing machine learning methods for healthcare applications, with a particular 
+                    emphasis on personalized medicine and clinical decision support systems. I work at the intersection of 
+                    computer science, statistics, and medicine to create tools that can improve patient outcomes.
+                </p>
+                <p>
+                    Previously, I completed my undergraduate degree at Brown University where I worked on natural language 
+                    processing and healthcare informatics. I have also interned at leading research labs including Google Research 
+                    and Microsoft Research.
+                </p>
+            </div>
         </section>
 
         <!-- Publications Section -->
@@ -422,11 +473,6 @@
                 <h3>Advancing Personalized Medicine Through Machine Learning: A Novel Framework for Patient Stratification</h3>
                 <p class="authors"><strong>Your Name</strong>, Collaborator A, Collaborator B, Advisor Name</p>
                 <p class="venue">Conference on Neural Information Processing Systems (NeurIPS), 2024</p>
-                <p class="abstract">
-                    We propose a novel machine learning framework for patient stratification that combines multi-modal clinical data 
-                    with genomic information. Our approach achieves state-of-the-art performance on benchmark datasets and demonstrates 
-                    significant improvements in treatment outcome prediction.
-                </p>
                 <div class="publication-links">
                     <a href="paper.pdf">PDF</a>
                     <a href="https://arxiv.org/abs/2024.xxxxx">arXiv</a>
@@ -438,10 +484,6 @@
                 <h3>Deep Learning for Clinical Decision Support: A Systematic Review and Meta-Analysis</h3>
                 <p class="authors">Collaborator A, <strong>Your Name</strong>, Collaborator C, Advisor Name</p>
                 <p class="venue">Journal of the American Medical Informatics Association (JAMIA), 2024</p>
-                <p class="abstract">
-                    This systematic review examines 150+ studies on deep learning applications in clinical decision support. 
-                    We identify key challenges and opportunities in translating research to clinical practice.
-                </p>
                 <div class="publication-links">
                     <a href="paper2.pdf">PDF</a>
                     <a href="https://doi.org/10.xxxx/jamia.2024.xxxxx">DOI</a>
@@ -452,14 +494,19 @@
                 <h3>Interpretable AI for Healthcare: Bridging the Gap Between Accuracy and Explainability</h3>
                 <p class="authors"><strong>Your Name</strong>, Advisor Name</p>
                 <p class="venue">International Conference on Machine Learning (ICML), 2023</p>
-                <p class="abstract">
-                    We develop interpretable deep learning models for healthcare applications that maintain high predictive accuracy 
-                    while providing clinically meaningful explanations. Our method has been validated in collaboration with physicians.
-                </p>
                 <div class="publication-links">
                     <a href="paper3.pdf">PDF</a>
                     <a href="https://arxiv.org/abs/2023.xxxxx">arXiv</a>
                     <a href="poster.pdf">Poster</a>
+                </div>
+            </div>
+
+            <div class="publication-item">
+                <h3>Neural Networks for Electronic Health Record Analysis: A Survey</h3>
+                <p class="authors"><strong>Your Name</strong>, Collaborator D</p>
+                <p class="venue">IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), 2023</p>
+                <div class="publication-links">
+                    <a href="paper4.pdf">PDF</a>
                 </div>
             </div>
         </section>
@@ -470,34 +517,45 @@
 
             <div class="experience-item">
                 <h3>Research Intern</h3>
-                <p class="company">Tech Company Research Lab | Location</p>
+                <p class="company">Google Research | Mountain View, CA</p>
                 <p class="date">Summer 2024</p>
                 <ul>
                     <li>Developed novel algorithms for large-scale healthcare data analysis</li>
                     <li>Collaborated with cross-functional teams to deploy models in production</li>
-                    <li>Published research findings at top-tier conference</li>
+                    <li>Published research findings at NeurIPS 2024</li>
                 </ul>
             </div>
 
             <div class="experience-item">
                 <h3>Graduate Research Assistant</h3>
-                <p class="company">University AI Lab | Location</p>
+                <p class="company">Stanford AI Lab | Stanford, CA</p>
                 <p class="date">September 2022 - Present</p>
                 <ul>
                     <li>Leading research projects on machine learning for precision health</li>
-                    <li>Mentoring undergraduate researchers</li>
-                    <li>Teaching assistant for graduate-level AI courses</li>
+                    <li>Mentoring undergraduate and master's students</li>
+                    <li>Teaching assistant for CS229: Machine Learning</li>
                 </ul>
             </div>
 
             <div class="experience-item">
-                <h3>Software Engineering Intern</h3>
-                <p class="company">Healthcare Technology Startup | Location</p>
-                <p class="date">Summer 2022</p>
+                <h3>Research Intern</h3>
+                <p class="company">Microsoft Research | Redmond, WA</p>
+                <p class="date">Summer 2023</p>
                 <ul>
-                    <li>Built data pipelines for clinical trial data processing</li>
-                    <li>Implemented machine learning models for patient outcome prediction</li>
-                    <li>Contributed to open-source healthcare informatics tools</li>
+                    <li>Built interpretable ML models for clinical applications</li>
+                    <li>Collaborated with physicians at partner hospitals</li>
+                    <li>Contributed to open-source healthcare AI tools</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <h3>Undergraduate Researcher</h3>
+                <p class="company">Brown University | Providence, RI</p>
+                <p class="date">January 2021 - May 2023</p>
+                <ul>
+                    <li>Conducted research on NLP for clinical text analysis</li>
+                    <li>Developed tools for automated medical coding</li>
+                    <li>Published work at EMNLP and JAMIA</li>
                 </ul>
             </div>
         </section>
@@ -509,13 +567,13 @@
             <div class="project-item">
                 <h3>HealthAI Toolkit</h3>
                 <p class="project-description">
-                    Open-source toolkit for applying machine learning to electronic health records. Includes preprocessing utilities, 
-                    pre-trained models, and evaluation frameworks. Used by researchers at 50+ institutions worldwide.
+                    Open-source toolkit for applying machine learning to electronic health records. Includes preprocessing 
+                    utilities, pre-trained models, and evaluation frameworks. Used by researchers at 50+ institutions worldwide.
                 </p>
-                <p class="tech-stack"><strong>Tech:</strong> Python, PyTorch, Scikit-learn, Pandas</p>
+                <p class="tech-stack"><strong>Tech:</strong> Python, PyTorch, Scikit-learn, Pandas, FHIR</p>
                 <div class="project-links">
                     <a href="https://github.com/yourusername/healthai">GitHub</a>
-                    <a href="https://healthai-docs.com">Documentation</a>
+                    <a href="https://healthai-docs.com">Docs</a>
                 </div>
             </div>
 
@@ -536,11 +594,24 @@
                 <h3>Patient Risk Stratification Dashboard</h3>
                 <p class="project-description">
                     Interactive web application for visualizing patient risk scores and treatment recommendations. 
-                    Developed in collaboration with clinical partners at Teaching Hospital.
+                    Developed in collaboration with clinical partners at Stanford Health Care.
                 </p>
                 <p class="tech-stack"><strong>Tech:</strong> React, D3.js, Node.js, PostgreSQL</p>
                 <div class="project-links">
                     <a href="https://github.com/yourusername/risk-dashboard">GitHub</a>
+                </div>
+            </div>
+
+            <div class="project-item">
+                <h3>MedicalQA: Question Answering System</h3>
+                <p class="project-description">
+                    Question answering system trained on medical literature and clinical guidelines. Provides evidence-based 
+                    answers with citations to source documents.
+                </p>
+                <p class="tech-stack"><strong>Tech:</strong> Python, BERT, Elasticsearch, Flask</p>
+                <div class="project-links">
+                    <a href="https://github.com/yourusername/medicalqa">GitHub</a>
+                    <a href="paper.pdf">Paper</a>
                 </div>
             </div>
         </section>
@@ -552,13 +623,13 @@
             <div class="education-item">
                 <h3>PhD in Computer Science, 2028 (expected)</h3>
                 <p class="institution">Stanford University</p>
-                <p class="date">Advisor: Prof. James Zou</p>
+                <p class="education-details">Advisor: Prof. James Zou | Stanford Graduate Fellowship, NSF GRFP</p>
             </div>
 
             <div class="education-item">
                 <h3>BS in Computer Science, 2023</h3>
                 <p class="institution">Brown University</p>
-                <p class="date">GPA: 4.0/4.0 | Magna Cum Laude</p>
+                <p class="education-details">GPA: 4.0/4.0 | Magna Cum Laude | Phi Beta Kappa</p>
             </div>
         </section>
     </main>
@@ -569,42 +640,6 @@
     </footer>
 
     <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Active nav link on scroll
-        const sections = document.querySelectorAll('section');
-        const navLinks = document.querySelectorAll('.nav-menu a');
-
-        window.addEventListener('scroll', () => {
-            let current = '';
-            
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (scrollY >= (sectionTop - 100)) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href').slice(1) === current) {
-                    link.classList.add('active');
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+        // Tab navigation
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections
