@@ -15,6 +15,7 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             background: #f5f5f5;
             color: #333;
+            scroll-behavior: smooth;
         }
 
         /* Header/Banner */
@@ -44,69 +45,98 @@
             gap: 2.5rem;
         }
 
-        .nav-tabs button {
-            background: none;
-            border: none;
+        .nav-tabs a {
             color: #666;
+            text-decoration: none;
             font-size: 0.95rem;
-            cursor: pointer;
             padding: 0.5rem 0;
             transition: color 0.3s;
-            font-family: inherit;
             position: relative;
         }
 
-        .nav-tabs button:hover {
+        .nav-tabs a:hover {
             color: #000;
         }
 
-        .nav-tabs button.active {
+        /* Awards Section */
+        .awards-section {
+            background: white;
+        }
+
+        .awards-container {
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .awards-container h2 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 3rem;
+            text-align: center;
+            letter-spacing: -1px;
             color: #000;
         }
 
-        .nav-tabs button.active::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: #000;
+        .awards-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .award-box {
+            background: #f5f5f5;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 2rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .award-box:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .award-box h3 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: #000;
+        }
+
+        .award-box .organization {
+            color: #667eea;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .award-box .date {
+            color: #999;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .award-box p {
+            color: #666;
+            line-height: 1.6;
+            font-size: 0.95rem;
         }
 
         /* Main Content */
         .main-content {
             margin-top: 80px;
-            min-height: calc(100vh - 80px);
         }
 
-        .page {
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .page.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Home/About Page */
-        .home-page {
-            min-height: calc(100vh - 80px);
+        .section {
+            min-height: 100vh;
+            padding: 4rem 2rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 4rem 2rem;
+        }
+
+        /* Home/About Section */
+        .home-section {
             background: white;
         }
 
@@ -154,15 +184,14 @@
             margin-left: auto;
         }
 
-        /* Experience Page */
-        .experience-page {
-            padding: 4rem 2rem;
+        /* Experience Section */
+        .experience-section {
             background: #f5f5f5;
         }
 
         .experience-container {
-            max-width: 1200px;
-            margin: 0 auto;
+            max-width: 800px;
+            width: 100%;
         }
 
         .experience-container h2 {
@@ -174,9 +203,9 @@
             color: #000;
         }
 
-        .experience-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        .experience-list {
+            display: flex;
+            flex-direction: column;
             gap: 2rem;
         }
 
@@ -189,7 +218,7 @@
         }
 
         .experience-box:hover {
-            transform: translateY(-5px);
+            transform: translateX(10px);
             box-shadow: 0 10px 30px rgba(0,0,0,0.08);
         }
 
@@ -225,15 +254,14 @@
             margin-bottom: 0.5rem;
         }
 
-        /* Projects Page */
-        .projects-page {
-            padding: 4rem 2rem;
+        /* Projects Section */
+        .projects-section {
             background: white;
         }
 
         .projects-container {
             max-width: 1200px;
-            margin: 0 auto;
+            width: 100%;
         }
 
         .projects-container h2 {
@@ -294,14 +322,9 @@
             border: 1px solid #e0e0e0;
         }
 
-        /* Contact Page */
-        .contact-page {
-            padding: 4rem 2rem;
+        /* Contact Section */
+        .contact-section {
             background: #f5f5f5;
-            min-height: calc(100vh - 80px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         .contact-container {
@@ -371,177 +394,178 @@
                 max-width: 300px;
             }
 
-            .experience-grid,
             .projects-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .experience-box:hover {
+                transform: translateY(-5px);
+            }
+
+            .award-box:hover {
+                transform: translateY(-5px);
             }
         }
     </style>
 </head>
 <body>
     <header class="header">
-        <a href="#" class="logo" onclick="showPage('home'); return false;">Your Name</a>
+        <a href="#home" class="logo">Your Name</a>
         <nav class="nav-tabs">
-            <button class="active" onclick="showPage('home')">Home</button>
-            <button onclick="showPage('experience')">Experience</button>
-            <button onclick="showPage('projects')">Projects</button>
-            <button onclick="showPage('contact')">Contact</button>
+            <a href="#home">Home</a>
+            <a href="#experience">Experience</a>
+            <a href="#projects">Projects</a>
+            <a href="#awards">Awards</a>
+            <a href="#contact">Contact</a>
         </nav>
     </header>
 
     <main class="main-content">
-        <!-- Home/About Page -->
-        <div id="home" class="page active">
-            <section class="home-page">
-                <div class="home-content">
-                    <div class="about-text">
-                        <h1>Hi, I'm Avani:)</h1>
-                        <p>Hi! I’m Avani:) I recently graduated from Harvey Mudd College with a BS in Physics and Computer Science. 
-                            I am particularly interested in the intersection of machine learning, data, physics, and science, 
-                            especially for social impact in climate and energy systems.</p>
-                    </div>
-                    <div class="profile-image">
-                        <span>Photo</span>
-                    </div>
+        <!-- Home/About Section -->
+        <section id="home" class="section home-section">
+            <div class="home-content">
+                <div class="about-text">
+                    <h1>Hi, I'm Avani</h1>
+                    <h2>Software Engineer & Designer</h2>
+                    <p>Hi! I’m Avani:) I recently graduated from Harvey Mudd College with a BS in Physics and Computer Science. 
+                        I am particularly interested in the intersection of machine learning, data, physics, and science, 
+                        especially for social impact in climate and energy systems.</p>
                 </div>
-            </section>
-        </div>
+                <div class="profile-image">
+                    <span>Photo</span>
+                </div>
+            </div>
+        </section>
 
-        <!-- Experience Page -->
-        <div id="experience" class="page">
-            <section class="experience-page">
-                <div class="experience-container">
-                    <h2>Experience</h2>
-                    <div class="experience-grid">
-
+        <!-- Experience Section -->
+        <section id="experience" class="section experience-section">
+            <div class="experience-container">
+                <h2>Experience</h2>
+                    <h3>Research</h3>
+                    <div class="experience-list">
                         <div class="experience-box">
-                            <h3>Research Intern</h3>
+                            <h4>Undergraduate Research Intern</h4>
                             <p class="company">FICUS Lab</p>
-                            <p class="date">June 2025 - Present</p>
+                            <p class="date">Sept 2023 – Aug 2025</p>
                             <ul>
-                                <li>Processed and analyzed complex air quality datasets using techniques such as filtering, interpolation, and standardization </li>
-                                <li>Applied and analyzed explainable AI (XAI) Layerwise Relevance Propagation (LRP) to Long Short-Term Memory (LSTM) models to understand ozone predictions in relation to known ozone influencing factors </li>                            </ul>
-                        </div>
-
-                        <div class="experience-box">
-                            <h3>Research Intern</h3>
-                            <p class="company">Gerbode Soft Matter Physics Lab</p>
-                            <p class="date">June 2025 - Present</p>
-                            <ul>
-                                <li>Analyzed colloid crystals employing image processing and image analysis techniques in MATLAB to study granule rotations</li>
-                                <li>Presented research at the American Physical Society’s March Meeting on cooperative motion and granule rotation during rapid grain shrinking in colloidal crystals; published in the American Physical Society</li>                            </ul>
-                        </div>
-                        
-                        <div class="experience-box">
-                            <h3>Machine Learning Team Member</h3>
-                            <p class="company">ExploraVist</p>
-                            <p class="date">June 2025 - Present</p>
-                            <ul>
-                                <li>Created machine learning pipeline with multilabel binarizers to enhance user safety for AI-powered wearable glasses</li>
-                                <li>Designed a verification framework to evaluate LLM text reading, using OCR and transformer-based models</li>                            </ul>
-                        </div>
-
-                        <div class="experience-box">
-                            <h3>Team Lead & Clinic Intern</h3>
-                            <p class="company">LS Power</p>
-                            <p class="date">Aug 2024 – May 2025</p>
-                            <ul>
-                                <li>Led a cross-functional team of 6 to develop predictive analytics solutions to identify problematic wells for a landfill-to-renewable-natural-gas plant, collaborating with customers, advisors, and industry experts to optimize workflow</li>
-                                <li>Processed and structured sensor datasets with 10+ parameters for 100+ sensors over several years </li>
-                                <li>Built Python pipelines to analyze sensor data that utilized Pandas for data filtration, Scikit-learn for machine learning model implementation, and statistical process control for trend analysis, which improved understanding and tracking of trends</li>
+                                <li> 
+                                    My research focused on improving the interpretability of long-short term memory models (LSTM) used to 
+                                    predict ozone levels, and on evaluating the effectiveness of the Explainable AI (XAI) 
+                                    technique Layerwise Relevance Propagation (LRP). </li>
                             </ul>
                         </div>
 
-                        <div class="experience-box">
-                            <h3>Software Engineering Intern</h3>
-                            <p class="company">SpaceX</p>
-                            <p class="date">May 2024 – Aug 2024</p>
-                            <ul>
-                                <li>Improved efficiency of coupled loads analysis through reimplementation and enhancement of MATLAB code in C++</li>
-                                <li>Developed and integrated multiple classes in C++ to model physical forces and enhance the accuracy of modal solvers</li>
-                                <li>Collaborated in a multi-developer production environment using Linux/Git, maintaining high-quality, production-ready code</li>
-                            </ul>
+                    <div class="experience-box">
+                        <h3>Front-End Developer</h3>
+                        <p class="company">Digital Agency</p>
+                        <p class="date">Jan 2020 - May 2022</p>
+                        <ul>
+                            <li>Built responsive websites for diverse clients</li>
+                            <li>Implemented modern UI/UX designs</li>
+                            <li>Mentored junior developers</li>
+                        </ul>
+                    </div>
+
+                    <div class="experience-box">
+                        <h3>Junior Developer</h3>
+                        <p class="company">Startup Inc.</p>
+                        <p class="date">Aug 2018 - Dec 2019</p>
+                        <ul>
+                            <li>Contributed to multiple product launches</li>
+                            <li>Learned modern development practices</li>
+                            <li>Participated in agile development process</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="section projects-section">
+            <div class="projects-container">
+                <h2>Projects</h2>
+                <div class="projects-grid">
+                    <div class="project-box">
+                        <h3>E-Commerce Platform</h3>
+                        <p>A full-stack e-commerce solution with real-time inventory management, payment processing, and admin dashboard. Built to handle high traffic and provide seamless user experience.</p>
+                        <div class="project-tags">
+                            <span class="tag">React</span>
+                            <span class="tag">Node.js</span>
+                            <span class="tag">MongoDB</span>
+                        </div>
+                    </div>
+
+                    <div class="project-box">
+                        <h3>Task Management App</h3>
+                        <p>A collaborative task management application with real-time updates, team workspaces, and analytics. Designed for remote teams to stay organized and productive.</p>
+                        <div class="project-tags">
+                            <span class="tag">TypeScript</span>
+                            <span class="tag">Firebase</span>
+                            <span class="tag">Tailwind</span>
+                        </div>
+                    </div>
+
+                    <div class="project-box">
+                        <h3>Weather Dashboard</h3>
+                        <p>An interactive weather dashboard that provides detailed forecasts, historical data, and personalized alerts. Features beautiful data visualizations and location-based recommendations.</p>
+                        <div class="project-tags">
+                            <span class="tag">Vue.js</span>
+                            <span class="tag">API Integration</span>
+                            <span class="tag">Chart.js</span>
                         </div>
                     </div>
                 </div>
-            </section>
-        </div>
+            </div>
+        </section>
 
-        <!-- Projects Page -->
-        <div id="projects" class="page">
-            <section class="projects-page">
-                <div class="projects-container">
-                    <h2>Projects</h2>
-                    <div class="projects-grid">
-                        <div class="project-box">
-                            <h3>E-Commerce Platform</h3>
-                            <p>A full-stack e-commerce solution with real-time inventory management, payment processing, and admin dashboard. Built to handle high traffic and provide seamless user experience.</p>
-                            <div class="project-tags">
-                                <span class="tag">React</span>
-                                <span class="tag">Node.js</span>
-                                <span class="tag">MongoDB</span>
-                            </div>
-                        </div>
+        <!-- Awards Section -->
+        <section id="awards" class="section awards-section">
+            <div class="awards-container">
+                <h2>Awards & Recognition</h2>
+                <div class="awards-list">
+                    <div class="award-box">
+                        <h3>Best Innovation Award</h3>
+                        <p class="organization">Tech Conference 2024</p>
+                        <p class="date">March 2024</p>
+                        <p>Recognized for developing an innovative solution that improved user engagement by 60% and set new standards in the industry.</p>
+                    </div>
 
-                        <div class="project-box">
-                            <h3>Task Management App</h3>
-                            <p>A collaborative task management application with real-time updates, team workspaces, and analytics. Designed for remote teams to stay organized and productive.</p>
-                            <div class="project-tags">
-                                <span class="tag">TypeScript</span>
-                                <span class="tag">Firebase</span>
-                                <span class="tag">Tailwind</span>
-                            </div>
-                        </div>
+                    <div class="award-box">
+                        <h3>Outstanding Developer of the Year</h3>
+                        <p class="organization">Tech Company</p>
+                        <p class="date">December 2023</p>
+                        <p>Awarded for exceptional contributions to product development, mentorship, and establishing best practices across the engineering team.</p>
+                    </div>
 
-                        <div class="project-box">
-                            <h3>Weather Dashboard</h3>
-                            <p>An interactive weather dashboard that provides detailed forecasts, historical data, and personalized alerts. Features beautiful data visualizations and location-based recommendations.</p>
-                            <div class="project-tags">
-                                <span class="tag">Vue.js</span>
-                                <span class="tag">API Integration</span>
-                                <span class="tag">Chart.js</span>
-                            </div>
-                        </div>
+                    <div class="award-box">
+                        <h3>Hackathon Winner</h3>
+                        <p class="organization">Global Hack 2022</p>
+                        <p class="date">August 2022</p>
+                        <p>First place among 500+ participants for creating a sustainable tech solution that addressed environmental challenges.</p>
+                    </div>
+
+                    <div class="award-box">
+                        <h3>Academic Excellence Award</h3>
+                        <p class="organization">University</p>
+                        <p class="date">May 2021</p>
+                        <p>Graduated with highest honors in Computer Science, recognized for outstanding academic performance and research contributions.</p>
                     </div>
                 </div>
-            </section>
-        </div>
+            </div>
+        </section>
 
-        <!-- Contact Page -->
-        <div id="contact" class="page">
-            <section class="contact-page">
-                <div class="contact-container">
-                    <h2>Get In Touch</h2>
-                    <p>I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision. Feel free to reach out!</p>
-                    <div class="contact-links">
-                        <a href="mailto:your.email@example.com">Email</a>
-                        <a href="https://linkedin.com" target="_blank">LinkedIn</a>
-                        <a href="https://github.com" target="_blank">GitHub</a>
-                    </div>
+        <!-- Contact Section -->
+        <section id="contact" class="section contact-section">
+            <div class="contact-container">
+                <h2>Get In Touch</h2>
+                <p>I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision. Feel free to reach out!</p>
+                <div class="contact-links">
+                    <a href="mailto:your.email@example.com">Email</a>
+                    <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+                    <a href="https://github.com" target="_blank">GitHub</a>
                 </div>
-            </section>
-        </div>
+            </div>
+        </section>
     </main>
-
-    <script>
-        function showPage(pageName) {
-            // Hide all pages
-            const pages = document.querySelectorAll('.page');
-            pages.forEach(page => page.classList.remove('active'));
-            
-            // Show selected page
-            document.getElementById(pageName).classList.add('active');
-            
-            // Update active tab
-            const tabs = document.querySelectorAll('.nav-tabs button');
-            tabs.forEach((tab, index) => {
-                tab.classList.remove('active');
-            });
-            event.target.classList.add('active');
-            
-            // Scroll to top
-            window.scrollTo(0, 0);
-        }
-    </script>
 </body>
 </html>
