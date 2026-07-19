@@ -28,7 +28,7 @@
 
   *{ box-sizing: border-box; }
   html{ color-scheme: light; scroll-behavior: smooth; }
-  section, .group-label{ scroll-margin-top: 84px; }
+  section, .group-label{ scroll-margin-top: 96px; }
   html[data-theme="dark"]{ color-scheme: dark; }
 
   body{
@@ -59,8 +59,11 @@
     z-index: 50;
     width: 100%;
     background: var(--band-a);
-    backdrop-filter: blur(8px);
-    box-shadow: 0 1px 0 var(--rule), 0 2px 10px rgba(0,0,0,0.03);
+    box-shadow: 0 1px 0 var(--rule);
+    transition: background 0.25s ease;
+  }
+  .topline.on-alt{
+    background: var(--band-b);
   }
   .topline-inner{
     max-width: var(--max);
@@ -98,11 +101,17 @@
   .topline .nav-links a{
     font-size: 13px;
     color: var(--text-muted);
-    border-bottom: none;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 3px;
     white-space: nowrap;
     flex: 0 0 auto;
+    transition: color 0.15s, border-color 0.15s;
   }
   .topline .nav-links a:hover{ color: var(--text); }
+  .topline .nav-links a.active{
+    color: var(--text);
+    border-bottom-color: var(--text);
+  }
   .theme-toggle{
     background: none;
     border: 1px solid var(--rule);
@@ -268,12 +277,12 @@
   <div class="topline-inner">
     <a class="home" href="#">Avani Anne</a>
     <div class="topline-right">
-      <nav class="nav-links">
-        <a href="#experience">Research</a>
-        <a href="#professional">Professional Experience</a>
-        <a href="#publications">Publications</a>
-        <a href="#teaching">Teaching &amp; Leadership</a>
-        <a href="#contact">Contact</a>
+      <nav class="nav-links" id="navLinks">
+        <a href="#professional" data-target="professional">Professional Experience</a>
+        <a href="#research" data-target="research">Research</a>
+        <a href="#publications" data-target="publications">Publications</a>
+        <a href="#teaching" data-target="teaching">Teaching &amp; Leadership</a>
+        <a href="#contact" data-target="contact">Contact</a>
         <a href="AvaniAnneWebsiteCV.pdf">Resume/CV</a>
       </nav>
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
@@ -291,7 +300,7 @@
         <h1>Welcome!</h1>
         <p class="intro">Hi! I'm Avani :) I recently graduated from Harvey Mudd College with a BS in Physics and Computer Science. I am interested in the intersection of machine learning, data, and science, especially in climate and energy systems.</p>
         <p class="intro">During my undergrad, I worked in the Gerbode Lab for Soft Matter Physics under Professor Sharon Gerbode and in the FICUS Lab (a computational climate lab) under Professor Sarah Kavassalis. I've also worked on my senior capstone project with LS Power and as a Software Engineering Intern at SpaceX. I'm currently working as an Analyst at Aurora Energy Research and on the Machine Learning Team at ExploraVist, an early-stage startup developing AI-powered glasses. I'm enthusiastic to bring my passion for social impact into my future interdisciplinary work.</p>
-        <p class="intro">In my free time, I love playing intramurals, singing, reading, and telling anti-jokes.</p>
+        <p class="intro">In my free time, I love being outdoors, singing, reading, both journaling &amp; journalism, and telling anti-jokes.</p>
         <div class="contact-line">
           <a href="mailto:avaninanne@gmail.com">Email</a><span class="sep">·</span><a href="https://www.linkedin.com/in/avani-anne/" target="_blank" rel="noopener">LinkedIn</a><span class="sep">·</span><a href="https://github.com/avani-anne" target="_blank" rel="noopener">GitHub</a><span class="sep">·</span><a href="AvaniAnneWebsiteCV.pdf">Resume/CV</a>
         </div>
@@ -307,35 +316,12 @@
   <div class="wrap">
     <h2>Experience</h2>
 
-    <p class="group-label">Research</p>
-
-    <div class="row">
-      <div class="role">Undergraduate Research Intern <span class="org">— <a href="https://www.ficus.space/" target="_blank" rel="noopener">FICUS Lab</a></span></div>
-      <div class="years">Sept 2023 – Aug 2025</div>
-      <div class="org" style="margin-top:-6px; font-size: 13.5px;">PI: Professor Sarah Kavassalis</div>
-      <div class="desc">
-        <p>The FICUS Lab's research focuses on flexible, interdisciplinary computational approaches for understanding the atmosphere. I studied the interpretability of long short-term memory models (LSTM) used to predict ozone levels, and evaluated the effectiveness of the explainable AI (XAI) technique layerwise relevance propagation (LRP).</p>
-        <p>To do this, I processed and restructured air quality datasets. I also tuned LSTM hyperparameters to find the optimal hyperparameters for ozone prediction. Then, I analyzed LRP results across multiple LSTM initializations, diurnal and seasonal cycles, and compared against random forest baselines (using libraries like Pandas &amp; SHAP).</p>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="role">Undergraduate Research Intern <span class="org">— Gerbode Lab for Soft Matter Physics</span></div>
-      <div class="years">Jan 2022 – March 2024</div>
-      <div class="org" style="margin-top:-6px; font-size: 13.5px;">PI: Professor Sharon Gerbode</div>
-      <div class="desc">
-        <p>The Gerbode Lab for Soft Matter Physics focuses on understanding the fundamental mechanisms that influence aging in small crystals. I specifically studied grain boundaries, which are a property of small crystals responsible for determining many bulk material properties, which can have applications in materials like photovoltaics. Despite the well-known importance of grain boundaries, the established theories that describe how grain boundaries move were developed for large crystals in the continuum limit. As technology pushes us toward smaller and smaller systems, we need a better understanding of the atomic scale mechanisms that enable grain boundary motion in smaller crystals.</p>
-        <p>During my research in this lab, I developed several scripts analyzing the properties of granule dissolution like cooperative motion, vorticity, and misorientation angle. I successfully found that the size of rotating granules during vorticity was inversely related to misorientation angle, like the underlying Moiré pattern in the crystal lattice. I've also successfully identified cooperative motion, a mechanism where particles follow each other as they move, as a signature of dissolution. My work also involved creating ramp cells (plates of colloidal particles) and employing optical blasting to create grain boundaries for physical observation.</p>
-        <p>Furthermore, I co-authored a peer-reviewed American Physical Society (APS) publication, and presented a talk at the APS March Meeting in 2024.</p>
-      </div>
-    </div>
-
     <p class="group-label" id="professional">Professional</p>
 
     <div class="row">
       <div class="role">Analyst <span class="org">— Aurora Energy Research</span></div>
       <div class="years">2025 – Present</div>
-      <div class="desc"><p>I work on the WECC and CAISO nodal research team, where I develop inputs for our CAISO/WECC model. This involves working with the interconnection queue and transmission upgrades, and mapping power plants to nodes within the model. I write scripts to speed up these processes, and collaborate closely with modellers and the regional CAISO/WECC modeling teams to analyze model results. I've also contributed to a databook and slides for publication, and spoken at our general meeting which includes 30+ customers.</p></div>
+      <div class="desc"><p>I work on the WECC and CAISO nodal research team, where I develop inputs for our CAISO/WECC model. This involves working with the interconnection queue and transmission upgrades, and mapping power plants to nodes within the model. I write scripts to speed up these processes, and collaborate closely with modellers and the regional CAISO/WECC modeling teams to analyze model results. I've also contributed to a databook and slides for publication, and spoken at a presentation on our team's work.</p></div>
     </div>
 
     <div class="row">
@@ -360,6 +346,29 @@
       <div class="years">May 2024 – Aug 2024</div>
       <div class="desc">
         <p>As a software engineering intern on the dynamics team, I collaborated in a multi-developer production environment to improve the efficiency of coupled loads analysis. I worked in a Linux/Git system to reimplement and enhance MATLAB code in C++. I developed and integrated multiple classes in C++ to model physical forces (like thrust, and positional force), and worked to enhance the accuracy of modal solvers. I also created unit tests using Pytest to ensure accuracy of results.</p>
+      </div>
+    </div>
+
+    <p class="group-label" id="research">Research</p>
+
+    <div class="row">
+      <div class="role">Undergraduate Research Intern <span class="org">— <a href="https://www.ficus.space/" target="_blank" rel="noopener">FICUS Lab</a></span></div>
+      <div class="years">Sept 2023 – Aug 2025</div>
+      <div class="org" style="margin-top:-6px; font-size: 13.5px;">PI: Professor Sarah Kavassalis</div>
+      <div class="desc">
+        <p>The FICUS Lab's research focuses on flexible, interdisciplinary computational approaches for understanding the atmosphere. I studied the interpretability of long short-term memory models (LSTM) used to predict ozone levels, and evaluated the effectiveness of the explainable AI (XAI) technique layerwise relevance propagation (LRP).</p>
+        <p>To do this, I processed and restructured air quality datasets. I also tuned LSTM hyperparameters to find the optimal hyperparameters for ozone prediction. Then, I analyzed LRP results across multiple LSTM initializations, diurnal and seasonal cycles, and compared against random forest baselines (using libraries like Pandas &amp; SHAP).</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="role">Undergraduate Research Intern <span class="org">— Gerbode Lab for Soft Matter Physics</span></div>
+      <div class="years">Jan 2022 – March 2024</div>
+      <div class="org" style="margin-top:-6px; font-size: 13.5px;">PI: Professor Sharon Gerbode</div>
+      <div class="desc">
+        <p>The Gerbode Lab for Soft Matter Physics focuses on understanding the fundamental mechanisms that influence aging in small crystals. I specifically studied grain boundaries, which are a property of small crystals responsible for determining many bulk material properties, which can have applications in materials like photovoltaics. Despite the well-known importance of grain boundaries, the established theories that describe how grain boundaries move were developed for large crystals in the continuum limit. As technology pushes us toward smaller and smaller systems, we need a better understanding of the atomic scale mechanisms that enable grain boundary motion in smaller crystals.</p>
+        <p>During my research in this lab, I developed several scripts analyzing the properties of granule dissolution like cooperative motion, vorticity, and misorientation angle. I successfully found that the size of rotating granules during vorticity was inversely related to misorientation angle, like the underlying Moiré pattern in the crystal lattice. I've also successfully identified cooperative motion, a mechanism where particles follow each other as they move, as a signature of dissolution. My work also involved creating ramp cells (plates of colloidal particles) and employing optical blasting to create grain boundaries for physical observation.</p>
+        <p>Furthermore, I co-authored a peer-reviewed American Physical Society (APS) publication, and presented a talk at the APS March Meeting in 2024.</p>
       </div>
     </div>
   </div>
@@ -458,6 +467,43 @@
       root.setAttribute('data-theme', next);
       localStorage.setItem('theme', next);
     });
+  })();
+  (function(){
+    var navLinks = Array.prototype.slice.call(document.querySelectorAll('#navLinks a[data-target]'));
+    var targets = navLinks.map(function(link){
+      return { link: link, el: document.getElementById(link.getAttribute('data-target')) };
+    }).filter(function(t){ return t.el; });
+
+    var topline = document.querySelector('.topline');
+    var bands = Array.prototype.slice.call(document.querySelectorAll('.band'));
+
+    function onScroll(){
+      var toplineHeight = topline.offsetHeight;
+      var offset = toplineHeight + 4;
+
+      var current = targets[0];
+      for (var i = 0; i < targets.length; i++){
+        var rect = targets[i].el.getBoundingClientRect();
+        if (rect.top <= offset){ current = targets[i]; }
+      }
+      targets.forEach(function(t){ t.link.classList.toggle('active', t === current); });
+
+      var currentBand = bands[0];
+      for (var j = 0; j < bands.length; j++){
+        var bRect = bands[j].getBoundingClientRect();
+        if (bRect.top <= toplineHeight){ currentBand = bands[j]; }
+      }
+      topline.classList.toggle('on-alt', currentBand && currentBand.classList.contains('alt'));
+    }
+
+    var ticking = false;
+    window.addEventListener('scroll', function(){
+      if (!ticking){
+        window.requestAnimationFrame(function(){ onScroll(); ticking = false; });
+        ticking = true;
+      }
+    });
+    onScroll();
   })();
 </script>
 
