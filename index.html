@@ -1,657 +1,341 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avani Anne</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Avani Anne</title>
+<meta name="description" content="Avani Anne — Physics & CS, Harvey Mudd College. ML, data, climate and energy systems.">
+<style>
+  :root{
+    --bg: #ffffff;
+    --text: #111111;
+    --text-muted: #666666;
+    --text-faint: #999999;
+    --rule: #e6e6e6;
+    --link: #111111;
+    --max: 620px;
+  }
+  html[data-theme="dark"]{
+    --bg: #0a0a0a;
+    --text: #eaeaea;
+    --text-muted: #9a9a9a;
+    --text-faint: #6b6b6b;
+    --rule: #232323;
+    --link: #eaeaea;
+  }
 
-        body {
-            font-family: 'Roboto', Times, serif;
-            background: #f5f5f5;
-            color: #333;
-            scroll-behavior: smooth;
-        }
+  *{ box-sizing: border-box; }
+  html{ color-scheme: light; }
+  html[data-theme="dark"]{ color-scheme: dark; }
 
-        h1, h2, h3, h4 {
-            font-family: Calibri, 'Trebuchet MS', sans-serif;
-        }
+  body{
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    transition: background 0.15s, color 0.15s;
+  }
 
-        /* Header/Banner */
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: white;
-            border-bottom: 1px solid #e0e0e0;
-            padding: 1.5rem 3rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-        }
+  a{ color: var(--link); text-decoration: none; border-bottom: 1px solid var(--rule); }
+  a:hover{ border-color: var(--text); }
+  a:focus-visible, button:focus-visible{ outline: 2px solid var(--text); outline-offset: 2px; }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: #000;
-            text-decoration: none;
-        }
+  .wrap{
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 64px 24px 96px;
+  }
 
-        .nav-tabs {
-            display: flex;
-            gap: 2.5rem;
-        }
+  .topline{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 44px;
+  }
+  .topline a.home{
+    font-size: 14px;
+    font-weight: 600;
+    border-bottom: none;
+  }
+  .theme-toggle{
+    background: none;
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--text-muted);
+  }
+  .theme-toggle:hover{ border-color: var(--text-faint); color: var(--text); }
+  .theme-toggle svg{ width: 15px; height: 15px; }
+  .theme-toggle .icon-moon{ display: none; }
+  html[data-theme="dark"] .theme-toggle .icon-sun{ display: none; }
+  html[data-theme="dark"] .theme-toggle .icon-moon{ display: block; }
 
-        .nav-tabs a {
-            color: #666;
-            text-decoration: none;
-            font-size: 0.95rem;
-            padding: 0.5rem 0;
-            transition: color 0.3s;
-            position: relative;
-        }
+  h1{
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0 0 14px;
+    letter-spacing: -0.01em;
+  }
 
-        .nav-tabs a:hover {
-            color: #000;
-        }
+  p.intro{
+    color: var(--text-muted);
+    margin: 0 0 14px;
+    font-size: 15.5px;
+  }
+  p.intro a{ color: var(--text-muted); border-color: var(--rule); }
+  p.intro a:hover{ color: var(--text); border-color: var(--text); }
 
-        /* Main Content */
-        .main-content {
-            margin-top: 60px; /* reduced to move everything up */
-        }
+  .contact-line{
+    font-size: 14.5px;
+    color: var(--text-muted);
+    margin-top: 20px;
+  }
+  .contact-line a{ margin-right: 4px; }
+  .contact-line span.sep{ color: var(--text-faint); margin: 0 6px; }
 
-        .section {
-            min-height: 100vh;
-            padding: 3rem 2rem; /* reduced padding */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+  section{
+    margin-top: 48px;
+  }
+  section h2{
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin: 0 0 18px;
+  }
 
-        /* Home/About Section */
-        .home-section {
-            background: #e8f4f8;
-        }
+  /* Row list (experience / teaching) */
+  .row{
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 4px 16px;
+    padding: 13px 0;
+    border-top: 1px solid var(--rule);
+    align-items: baseline;
+  }
+  .row:first-of-type{ border-top: none; }
+  .row .role{
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .row .org{
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+  .row .org a{ color: var(--text-muted); }
+  .row .org a:hover{ color: var(--text); }
+  .row .years{
+    font-size: 13px;
+    color: var(--text-faint);
+    white-space: nowrap;
+    text-align: right;
+  }
+  .row .desc{
+    grid-column: 1 / -1;
+    color: var(--text-muted);
+    font-size: 14.5px;
+    line-height: 1.6;
+    margin-top: 8px;
+    max-width: 100%;
+  }
+  .row .desc + .desc{ margin-top: 8px; }
+  .row .extra-link{
+    grid-column: 1 / -1;
+    margin-top: 6px;
+    font-size: 13px;
+  }
 
-        .home-content {
-            max-width: 1000px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
+  .group-label{
+    font-size: 12px;
+    color: var(--text-faint);
+    margin: 26px 0 2px;
+  }
+  .group-label:first-child{ margin-top: 0; }
 
-        .about-text h1 {
-            font-size: 3rem;
-            font-weight: 300;
-            margin-bottom: 1.5rem;
-            letter-spacing: -1px;
-            color: #000;
-            font-family: Calibri, sans-serif;
-        }
+  /* Publications */
+  .pub{
+    padding: 14px 0;
+    border-top: 1px solid var(--rule);
+  }
+  .pub:first-of-type{ border-top: none; }
+  .pub .title{ font-size: 15px; font-weight: 600; }
+  .pub .authors{ font-size: 13.5px; color: var(--text-muted); margin-top: 4px; }
+  .pub .authors strong{ color: var(--text); font-weight: 600; }
+  .pub .venue{ font-size: 13px; color: var(--text-faint); margin-top: 2px; }
+  .pub .extra-link{ margin-top: 6px; font-size: 13px; }
 
-        .about-text p {
-            font-size: 1.05rem;
-            line-height: 1.8;
-            color: #000;
-            margin-bottom: 1.5rem;
-            font-family: Calibri, sans-serif;
-        }
+  .inline-list{
+    font-size: 14.5px;
+    color: var(--text-muted);
+  }
+  .inline-list span.sep{ color: var(--text-faint); margin: 0 6px; }
 
-        .profile-photo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .profile-pic {
-            width: 300px;
-            height: 300px;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 3px solid #e0e0e0;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
+  footer{
+    margin-top: 64px;
+    padding-top: 20px;
+    border-top: 1px solid var(--rule);
+    font-size: 12.5px;
+    color: var(--text-faint);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
 
-        /* Experience Section */
-        .experience-section {
-            background: #f5f5f5;
-        }
-
-        .experience-container {
-            max-width: 800px;
-            width: 100%;
-        }
-
-        .experience-container h2 {
-            font-size: 2.5rem;
-            font-weight: 300;
-            margin-bottom: 2rem;
-            text-align: center;
-            letter-spacing: -1px;
-            color: #000;
-        }
-
-        .experience-list {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .experience-box {
-            background: white;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 2rem;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .experience-box:hover {
-            transform: translateX(10px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-        }
-
-        .experience-box h3, .experience-box h4 {
-            font-size: 1.3rem;
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-            color: #000;
-        }
-
-        .experience-box .company {
-            color: #699768;
-            font-size: 1rem;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
-
-        .experience-box .date {
-            color: #999;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        .experience-box ul {
-            margin-top: 1rem;
-            padding-left: 1.5rem;
-            color: #000;
-        }
-
-        .experience-box li {
-            line-height: 1.6;
-            font-size: 0.95rem;
-            margin-bottom: 0.5rem;
-        }
-
-        /* Publications Section (formerly Projects) */
-        .projects-section {
-            background: #e8f4f8;
-        }
-
-        .projects-container {
-            max-width: 1200px;
-            width: 100%;
-        }
-
-        .projects-container h2 {
-            font-size: 2.5rem;
-            font-weight: 300;
-            margin-bottom: 2rem;
-            text-align: center;
-            letter-spacing: -1px;
-            color: #000;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-        }
-
-        .presentation-box {
-            background: white;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 2rem;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .presentation-box:hover {
-            transform: translateX(10px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-        }
-
-        .presentation-box h3 {
-            font-size: 1.3rem;
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-            color: #000;
-        }
-
-        .presentation-box p {
-            color: #000;
-            line-height: 1.6;
-            font-size: 0.95rem;
-        }
-
-        .presentation-box a {
-            color: #667eea;
-            text-decoration: none;
-        }
-
-        .presentation-box a:hover {
-            text-decoration: underline;
-        }
-
-        /* Teaching & Leadership Section (formerly Awards) */
-        .awards-section {
-            background: #f5f5f5;
-        }
-
-        /* Teaching & Leadership Grid */
-        /* Teaching & Leadership Section (formerly Awards) */
-        .awards-section {
-            background: #f5f5f5;
-        }
-
-        .awards-container {
-            max-width: 800px;
-            width: 100%;
-        }
-
-        .awards-container h2 {
-            font-size: 2.5rem;
-            font-weight: 300;
-            margin-bottom: 2rem;
-            text-align: center;
-            letter-spacing: -1px;
-            color: #000;
-        }
-
-        .awards-list {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .award-box {
-            padding: 2rem 0;
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        .award-box:last-child {
-            border-bottom: none;
-        }
-
-        .award-box h3 {
-            font-size: 1.3rem;
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-            color: #000;
-        }
-
-        .award-box .organization {
-            color: #699768;
-            font-size: 1rem;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
-
-        .award-box .date {
-            color: #999;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        .award-box p {
-            color: #000;
-            line-height: 1.6;
-            font-size: 0.95rem;
-        }
-
-        /* Contact Section */
-        .contact-section {
-            background: #e8f4f8;
-        }
-
-        .contact-container {
-            max-width: 600px;
-            text-align: center;
-        }
-
-        .contact-container h2 {
-            font-size: 2.5rem;
-            font-weight: 300;
-            margin-bottom: 2rem;
-            letter-spacing: -1px;
-            color: #000;
-        }
-
-        .contact-container p {
-            color: #666;
-            line-height: 1.8;
-            margin-bottom: 2rem;
-            font-size: 1.05rem;
-        }
-
-        .contact-links {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .contact-links a {
-            color: #000;
-            text-decoration: none;
-            padding: 1rem 2rem;
-            border: 1px solid #000;
-            border-radius: 4px;
-            transition: all 0.3s;
-            font-size: 0.95rem;
-        }
-
-        .contact-links a:hover {
-            background: #000;
-            color: #fff;
-        }
-
-        @media (max-width: 768px) {
-            .header {
-                padding: 1rem 1.5rem;
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .nav-tabs {
-                gap: 1.5rem;
-            }
-
-            .home-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .about-text h1 {
-                font-size: 2rem;
-            }
-
-            .profile-photo {
-                margin: 0 auto;
-                max-width: 500px;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .experience-box:hover,
-            .award-box:hover,
-            .presentation-box:hover {
-                transform: translateY(-5px);
-            }
-        }
-    </style>
+  @media (max-width: 480px){
+    .row{ grid-template-columns: 1fr; }
+    .row .years{ text-align: left; }
+  }
+</style>
 </head>
 <body>
-    <header class="header">
-        <a href="#home" class="logo">Avani Anne</a>
-        <nav class="nav-tabs">
-            <a href="#home">Home</a>
-            <a href="#experience">Experience</a>
-            <a href="#projects">Publications</a>
-            <a href="#teaching">Teaching & Leadership</a>
-            <a href="#contact">Contact</a>
-            <a href="AvaniAnneWebsiteCV.pdf" target="_blank">Resume/CV</a>
-        </nav>
-    </header>
+<div class="wrap">
 
-    <main class="main-content">
-        <!-- Home/About Section -->
-        <section id="home" class="section home-section">
-            <div class="home-content">
-                <div class="about-text">
-                    <h1>Welcome!</h1>
-                    <p>Hi! I'm Avani :) I recently graduated from Harvey Mudd College with a BS in Physics and Computer Science.
-                        I am interested in the intersection of machine learning, data, and science, especially in climate and energy systems. 
-                        </p>
-                        <p> 
-                        During my undergrad, I worked in the Gerbode Lab for Soft Matter Physics under Professor Sharon Gerbode and in the 
-                        FICUS Lab (a computational climate lab) under Professor Sarah Kavassalis. I've also worked on my senior capstone project
-                        with LS Power and as a Software Engineering Intern at SpaceX. I'm currently working as an Analyst at Aurora Energy Research 
-                        and on the Machine Learning Team at ExploraVist, an early-stage startup developing AI-powered glasses. I'm enthusiastic to 
-                        bring my passion for social impact into my future interdisciplinary work. 
-                        </p>
-                        <p> 
-                        In my free time, I love being outdoors, singing, reading, both journaling & journalism, 
-                        and telling anti-jokes. 
-                        
-                    </p>
+  <div class="topline">
+    <a class="home" href="#">Avani Anne</a>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+    </button>
+  </div>
 
-                    
-                </div>
-                <div class="profile-photo">
-                    <img src="IMG_6519.jpg" alt="Avani Anne" class="profile-pic">
-                </div>
-            </div>
-        </section>
+  <h1>Avani Anne</h1>
+  <p class="intro">
+    I recently graduated from Harvey Mudd College with a BS in Physics and Computer Science.
+    I'm interested in the intersection of machine learning, data, and science — especially in climate and energy systems.
+    Currently an Analyst at <a href="https://auroraer.com/" target="_blank" rel="noopener">Aurora Energy Research</a> and on the ML team at ExploraVist.
+  </p>
+  <p class="intro">
+    Previously: research in the <a href="https://www.ficus.space/" target="_blank" rel="noopener">FICUS Lab</a> (computational climate) and the Gerbode Lab (soft matter physics), a capstone with LS Power, and a software engineering internship at SpaceX.
+  </p>
+  <div class="contact-line">
+    <a href="mailto:avaninanne@gmail.com">Email</a><span class="sep">·</span><a href="https://www.linkedin.com/in/avani-anne/" target="_blank" rel="noopener">LinkedIn</a><span class="sep">·</span><a href="https://github.com/avani-anne" target="_blank" rel="noopener">GitHub</a><span class="sep">·</span><a href="AvaniAnneWebsiteCV.pdf">Resume/CV</a>
+  </div>
 
-        <!-- Experience Section -->
-        <section id="experience" class="section experience-section">
-            <div class="experience-container">
-                <h2>Experience</h2>
-                
-                <h3>Research</h3>
-                
-                <div class="experience-list">
-                    <div class="experience-box">
-                        <h4>Undergraduate Research Intern, <a href="https://www.ficus.space/">FICUS lab</a></h4>
-                        <p class="company">PI: Professor Sarah Kavassalis</p>
-                        <p class="date">Sept 2023 – Aug 2025</p>
-                        <ul> 
-                            The FICUS Lab's research focuses on flexible, interdisciplinary computational approaches for understanding the atmosphere.
-                            I studied the interpretability of long short-term memory models (LSTM) used to predict ozone levels, 
-                            and evaluated the effectiveness of the explainable AI (XAI) technique layerwise relevance propagation (LRP). 
+  <section id="experience">
+    <h2>Experience</h2>
 
-                            </p>
-                            <p> 
-                            To do this, I processed and restructured air quality datasets. 
-                            I also tuned LSTM hyperparameters to find the optimal hyperparameters for ozone prediction. 
-                            Then, I analyzed LRP results across multiple LSTM initializations, diurnal and seasonal cycles, 
-                            and compared against random forest baselines (using libraries like Pandas & SHAP). 
-
-
-                        </ul>
-                    </div>
-
-                    <div class="experience-box">
-                        <h4>Undergraduate Research Intern, Gerbode Lab for Soft Matter Physics</h4>
-                        <p class="company">PI: Professor Sharon Gerbode</p>
-                        <p class="date">Jan 2022 – March 2024</p>
-                        <ul>
-                            The Gerbode Lab for Soft Matter Physics focuses on understanding the fundamental mechanisms that influence aging in small crystals. 
-                            I specifically studied grain boundaries, which are a property of small crystals responsible for determining many bulk material properties, which can have applications in materials like photovoltaics. 
-                            Despite the well-known importance of grain boundaries, the established theories that describe how grain boundaries move, were developed for large crystals in the continuum limit.
-                            As technology pushes us toward smaller and smaller systems, we need a better understanding of the atomic scale mechanisms that enable grain boundary motion in smaller crystals. 
-                            </p>
-                            <p> 
-                            
-                            During my research in this lab, I developed several scripts analyzing the properties of granule dissolution like cooperative motion, vorticity, 
-                            and misorientation angle. I successfully found that the size of rotating granules during vorticity was inversely 
-                            related to misorientation angle, like the underlying Moiré pattern in the crystal lattice. I’ve also successfully 
-                            identified cooperative motion, a mechanism where particles follow each other as they move, as a signature of dissolution. 
-                            My work also involved creating ramp cells (plates of colloidal particles) and employing optical blasting to create grain boundaries 
-                            for physical observation. 
-                            </p>
-                            <p> 
-                                Furthermore, I co-authored a peer-reviewed American Physical Society (APS) publication, 
-                            and presenting a talk at the APS March Meeting in 2024. 
-                        </ul>
-                    </div>
-
-                    <h3>Professional</h3>
-
-                    <div class="experience-box">
-                        <h4>Machine Learning Engineer, ExploraVist </h4>
-                        <p class="date">June 2025 – Present</p>
-                        <ul>
-                            I’m a machine learning (ML) engineer at ExploraVist, an early-stage startup creating AI-powered glasses to assist the visually impaired community. 
-                            I’ve worked on classifying the safety of user queries. To do this, I built a dataset of queries, then used transformer-based embeddings to encode the data, 
-                            and multilabel classification to label new prompts as “safe” or “unsafe.” I’ve also designed a verification framework to evaluate LLM text reading, 
-                            like developing benchmarking techniques (checking accuracy of words and phrases detected). 
-                        </ul>
-                    </div>
-
-
-                    <div class="experience-box">
-                        <h4>Team Lead & Clinic Intern, LS Power</h4>
-                        <p class="date">Aug 2024 – May 2025</p>
-                
-                        <ul>
-                        I led a team of six to optimize the gas-capture process of methane at a landfill-to-renewable gas purification 
-                        plant through analysis of landfill sensor data. The data contained 10+ parameters for 100+ sensors over the 
-                        course of several years. This data was quite noisy, and had many gaps, so we employed techniques like filtering 
-                        and interpolation during processing. I realized that to properly identify broken sensors, we needed to perform trend 
-                        analysis that combined methods from statistical process control, feature engineering, and machine learning. 
-                        We also needed to embed domain knowledge from site technicians, like constraints on parameter values, directly into our 
-                        model. My work in developing this combined-approach pipeline resulted in the team being able to predict broken sensors 
-                        up to a week in advance. In addition, the team prototyped a user interface to facilitate real-time tracking of well status, 
-                        as this was a dataset that would have been useful to the overall analysis. Serving as team lead taught me to communicate 
-                        results to engineers, site technicians, and industry experts, reinforcing the importance of interpretable tools. 
-                        
-                
-                        View our capstone poster: 
-                        <a href="LS Power Harvey Mudd Clinic Poster 2024-25 - FINAL.pdf", target="_blank">
-                            Projects Day Poster
-                        </a>
-                    </ul>
-                </div>
-                    
-                    
-
-                    <div class="experience-box">
-                        <h4>Software Engineering Intern, SpaceX</h4>
-                        <p class="date">May 2024 – Aug 2024</p>
-                        <ul>
-                        	As a software engineering intern on the dynamics team, 
-                            I collaborated in a multi-developer production environment to improve the efficiency of coupled loads analysis. 
-                            I worked in a Linux/Git system to reimplement and enhance MATLAB code in C++. I developed and integrated multiple 
-                            classes in C++ to model physical forces (like thrust, and positional force), and worked to enhance the accuracy 
-                            of modal solvers. I also created units tests using Pytest to ensure accuracy of results. 
-
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Publications Section -->
-        <section id="projects" class="section projects-section">
-            <div class="projects-container">
-                <h2>Publications and Presentations</h2>
-                <div class="projects-grid">
-                    <div class="presentation-box">
-                        <h3>Hexagonal vortices enable faster colloidal crystal grain coarsening</h3>
-                        <p>H. Chaffee, E. Corona, C. G. Couto, <strong>A. Anne</strong>, E. L. Rogers, A. L. Galper, C. M. Floyd, A. Venkatachalam, S. J. Gerbode.  
-                        <em>Physical Review E</em>, Vol. 110, No. 1, 2024.</p>
-                        <a href="https://journals.aps.org/pre/abstract/10.1103/PhysRevE.110.014608" target="_blank">[Paper]</a></p>
-                        </p>
-                        <p> 
-                    </div>
-
-                    <div class="presentation-box">
-                        <h3>Cooperative motion and granule rotation during rapid grain shrinking in colloidal crystals</h3>
-                        <p><strong>Avani Anne</strong>, Eric Corona, Helen K. Chaffee, Chris G. Couto, Elizabeth L. Rogers, Aaron L. Galper, Conor M. Floyd, Ananya Venkatachalam, Sharon J. Gerbode.  
-                        <em>APS March Meeting 2024</em>.</p>
-                        <a href="https://meetings.aps.org/Meeting/MAR24/Session/Z34.8" target="_blank">[View Abstract]</a></p>
-                        </p>
-                        <p> 
-                    </div>
-
-                    <div class="presentation-box">
-                        <h3>Exploring the Explainability Power of AI in Identifying Causal Factors of Air Pollution: An Ozone in Los Angeles Case Study</h3>
-                        <p>Georgia Klein, <strong>Avani Anne</strong>, Sarah Kavassalis (PI), et al.  
-                        <em>AGU Fall Meeting 2023</em>.  
-                        <a href="https://static1.squarespace.com/static/62c89ac188bea71ee536bd7f/t/65b686efc0bd2834e02b3532/1706460916398/Georgia_AGU2023_final.pdf" target="_blank">[View Poster]</a></p>
-                    </div>
-
-                    <div class="presentation-box">
-                        <h3>Honors</h3>
-                        <p><strong>Graduated with High Distinction </strong></p>
-                        <p><strong>Departmental Honors in three subjects: CS, Physics, and Humanities, Social Science, and the Arts </strong></p>
-                        <p><strong>Physics Community Award</strong></p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Teaching & Leadership Section -->
-<section id="teaching" class="section awards-section">
-    <div class="awards-container">
-        <h2>Teaching & Leadership</h2>
-        <div class="awards-grid">
-            <div class="award-box">
-                <h3>Physics Tutor</h3>
-                <p class="company">Academic Excellence</p>
-                <p class="date">Aug 2023 – May 2025</p>
-                <p>Tutored students in core physics courses including Electromagnetic Theory, Mechanics, and Relativity. 
-                    Nominated by department faculty. Acted as liaison between professors and tutors, teaching problem-solving skills and enabling conceptual mastery. 
-                
-                </p>
-            </div>
-
-            <div class="award-box">
-                <h3>Algorithms Grader & Tutor</h3>
-                <p class="company">Computer Science Department</p>
-                <p class="date">Jan 2025 - May 2025</p>
-                <p>Graded and tutored for the Algorithms course, covering topics such as dynamic programming, NP-completeness, and approximation algorithms. </p>
-                <p>The course description can be viewed <a href="https://catalog.hmc.edu/preview_course_nopop.php?catoid=24&coid=7738">[here].</a> </p>
-            </div>
-
-            <div class="award-box">
-                <h3>Co-Editor-in-Chief & Senior Advisor</h3>
-                <p class="company">The Muddraker (College Newspaper)</p>
-                <p class="date">Aug 2022 – May 2025</p>
-                <p>Led editorial team meetings, organized subteams, recruited members, managed the publication schedule, 
-                    and wrote, designed, and edited content. Highlights include spotlighting faculty and covering dining hall operations. <a href="https://themuddraker.org/">[website]</a></p>
-            </div>
-
-            <div class="award-box">
-                <h3>Diversity Director</h3>
-                <p class="company">Associated Students of Harvey Mudd College</p>
-                <p class="date">Aug 2023 – May 2024</p>
-                <p> Worked with Office of Institutional Diversity, various affinity groups, and school leadership to develop community and inclusivity on campus. 
-                </p>
-            </div>
-
-            <div class="award-box">
-                <h3>Other Involvements</h3>
-                <p>Women in Physics Mentor, Student Member on Task Force for Clinic Partnerships, 
-                    Dorm Mentor, Girl Scouts, VEX & FRC Robotics </p>
-            </div>
-        </div>
+    <div class="row">
+      <div class="role">Machine Learning Engineer <span class="org">— ExploraVist</span></div>
+      <div class="years">2025–Present</div>
+      <div class="desc">ExploraVist is an early-stage startup creating AI-powered glasses to assist the visually impaired community. I've worked on classifying the safety of user queries, building a query dataset, using transformer-based embeddings to encode it, and applying multilabel classification to label prompts as "safe" or "unsafe." I've also designed a verification framework to evaluate LLM text reading, including benchmarks for word- and phrase-level accuracy.</div>
     </div>
-</section>
 
+    <div class="row">
+      <div class="role">Team Lead &amp; Clinic Intern <span class="org">— LS Power</span></div>
+      <div class="years">2024–2025</div>
+      <div class="desc">I led a team of six to optimize the gas-capture process of methane at a landfill-to-renewable-gas purification plant, analyzing landfill sensor data spanning 10+ parameters across 100+ sensors over several years. The data was noisy with many gaps, so we combined filtering and interpolation with trend analysis that drew on statistical process control, feature engineering, and machine learning, embedding domain knowledge like technician-supplied parameter constraints directly into the model. This pipeline let the team predict broken sensors up to a week in advance, and serving as lead taught me to communicate results clearly across engineers, technicians, and industry experts.</div>
+      <div class="extra-link"><a href="LS%20Power%20Harvey%20Mudd%20Clinic%20Poster%202024-25%20-%20FINAL.pdf" target="_blank" rel="noopener">Capstone poster →</a></div>
+    </div>
 
-        <!-- Contact Section -->
-        <section id="contact" class="section contact-section">
-            <div class="contact-container">
-                <h2>Contact</h2>
-                <p>Feel free to reach out via email or connect on LinkedIn and GitHub.</p>
-                <div class="contact-links">
-                    <a href="mailto:avaninanne@gmail.com">Email</a>
-                    <a href="https://www.linkedin.com/in/avani-anne/" target="_blank">LinkedIn</a>
-                    <a href="https://github.com/avani-anne" target="_blank">GitHub</a>
-                </div>
-            </div>
-        </section>
-    </main>
+    <div class="row">
+      <div class="role">Software Engineering Intern <span class="org">— SpaceX</span></div>
+      <div class="years">2024</div>
+      <div class="desc">As a software engineering intern on the dynamics team, I collaborated in a multi-developer production environment to improve the efficiency of coupled loads analysis. I worked in a Linux/Git system to reimplement and enhance MATLAB code in C++, developing classes to model physical forces like thrust and positional force and working to improve the accuracy of modal solvers. I also wrote Pytest unit tests to verify the accuracy of results.</div>
+    </div>
+
+    <div class="row">
+      <div class="role">Undergraduate Researcher <span class="org">— <a href="https://www.ficus.space/" target="_blank" rel="noopener">FICUS Lab</a>, PI Sarah Kavassalis</span></div>
+      <div class="years">2023–2025</div>
+      <div class="desc">The FICUS Lab's research focuses on flexible, interdisciplinary computational approaches for understanding the atmosphere. I studied the interpretability of long short-term memory models (LSTM) used to predict ozone levels, and evaluated the explainable-AI technique layerwise relevance propagation (LRP). I processed and restructured air quality datasets, tuned LSTM hyperparameters to find the optimal settings for ozone prediction, and analyzed LRP results across multiple model initializations and diurnal and seasonal cycles, comparing them against random forest baselines using Pandas and SHAP.</div>
+    </div>
+
+    <div class="row">
+      <div class="role">Undergraduate Researcher <span class="org">— Gerbode Lab for Soft Matter Physics, PI Sharon Gerbode</span></div>
+      <div class="years">2022–2024</div>
+      <div class="desc">The Gerbode Lab studies the fundamental mechanisms that influence aging in small crystals, and I focused on grain boundaries — a property that determines many bulk material properties, with applications in materials like photovoltaics. I developed scripts analyzing cooperative motion, vorticity, and misorientation angle during granule dissolution, and found that the size of rotating granules was inversely related to misorientation angle, echoing the underlying Moiré pattern in the crystal lattice. I also identified cooperative motion, where particles follow each other as they move, as a signature of dissolution, and built ramp cells using optical blasting to create grain boundaries for physical observation. I co-authored a peer-reviewed APS publication on this work and presented it at the APS March Meeting 2024.</div>
+    </div>
+  </section>
+
+  <section id="publications">
+    <h2>Publications &amp; Presentations</h2>
+
+    <div class="pub">
+      <div class="title">Hexagonal vortices enable faster colloidal crystal grain coarsening</div>
+      <div class="authors">H. Chaffee, E. Corona, C. G. Couto, <strong>A. Anne</strong>, E. L. Rogers, A. L. Galper, C. M. Floyd, A. Venkatachalam, S. J. Gerbode.</div>
+      <div class="venue">Physical Review E, Vol. 110, No. 1, 2024</div>
+      <div class="extra-link"><a href="https://journals.aps.org/pre/abstract/10.1103/PhysRevE.110.014608" target="_blank" rel="noopener">Paper →</a></div>
+    </div>
+
+    <div class="pub">
+      <div class="title">Cooperative motion and granule rotation during rapid grain shrinking in colloidal crystals</div>
+      <div class="authors"><strong>Avani Anne</strong>, Eric Corona, Helen K. Chaffee, Chris G. Couto, Elizabeth L. Rogers, Aaron L. Galper, Conor M. Floyd, Ananya Venkatachalam, Sharon J. Gerbode.</div>
+      <div class="venue">APS March Meeting 2024</div>
+      <div class="extra-link"><a href="https://meetings.aps.org/Meeting/MAR24/Session/Z34.8" target="_blank" rel="noopener">Abstract →</a></div>
+    </div>
+
+    <div class="pub">
+      <div class="title">Exploring the Explainability Power of AI in Identifying Causal Factors of Air Pollution: An Ozone in Los Angeles Case Study</div>
+      <div class="authors">Georgia Klein, <strong>Avani Anne</strong>, Sarah Kavassalis (PI), et al.</div>
+      <div class="venue">AGU Fall Meeting 2023</div>
+      <div class="extra-link"><a href="https://static1.squarespace.com/static/62c89ac188bea71ee536bd7f/t/65b686efc0bd2834e02b3532/1706460916398/Georgia_AGU2023_final.pdf" target="_blank" rel="noopener">Poster →</a></div>
+    </div>
+
+    <p class="inline-list" style="margin-top:18px;">Graduated with High Distinction<span class="sep">·</span>Departmental Honors — CS, Physics, HSA<span class="sep">·</span>Physics Community Award</p>
+  </section>
+
+  <section id="teaching">
+    <h2>Teaching &amp; Leadership</h2>
+
+    <div class="row">
+      <div class="role">Physics Tutor <span class="org">— Academic Excellence</span></div>
+      <div class="years">2023–2025</div>
+      <div class="desc">I tutored students in core physics courses including Electromagnetic Theory, Mechanics, and Relativity, and was nominated for the role by department faculty. I also acted as a liaison between professors and tutors, teaching problem-solving skills and enabling conceptual mastery.</div>
+    </div>
+
+    <div class="row">
+      <div class="role">Algorithms Grader &amp; Tutor <span class="org">— CS Department</span></div>
+      <div class="years">2025</div>
+      <div class="desc">I graded and tutored for the Algorithms course, covering topics such as dynamic programming, NP-completeness, and approximation algorithms.</div>
+    </div>
+
+    <div class="row">
+      <div class="role">Co-Editor-in-Chief &amp; Senior Advisor <span class="org">— <a href="https://themuddraker.org/" target="_blank" rel="noopener">The Muddraker</a></span></div>
+      <div class="years">2022–2025</div>
+      <div class="desc">I led editorial team meetings, organized subteams, recruited members, and managed the publication schedule, while also writing, designing, and editing content. Highlights include spotlighting faculty and covering dining hall operations.</div>
+    </div>
+
+    <div class="row">
+      <div class="role">Diversity Director <span class="org">— Associated Students of Harvey Mudd College</span></div>
+      <div class="years">2023–2024</div>
+      <div class="desc">I worked with the Office of Institutional Diversity, various affinity groups, and school leadership to develop community and inclusivity on campus.</div>
+    </div>
+
+    <p class="group-label">Also</p>
+    <p class="inline-list">Women in Physics Mentor<span class="sep">·</span>Task Force on Clinic Partnerships<span class="sep">·</span>Dorm Mentor<span class="sep">·</span>Girl Scouts<span class="sep">·</span>VEX &amp; FRC Robotics</p>
+  </section>
+
+  <footer>
+    <span>© 2026 Avani Anne</span>
+    <span><a href="AvaniAnneWebsiteCV.pdf">Resume/CV</a></span>
+  </footer>
+
+</div>
+
+<script>
+  (function(){
+    var root = document.documentElement;
+    var toggle = document.getElementById('themeToggle');
+    var stored = localStorage.getItem('theme');
+    var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var theme = stored || (prefersDark ? 'dark' : 'light');
+    root.setAttribute('data-theme', theme);
+    toggle.addEventListener('click', function(){
+      var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    });
+  })();
+</script>
+
 </body>
 </html>
