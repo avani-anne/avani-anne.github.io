@@ -133,7 +133,7 @@
   /* Intro / hero */
   .hero-row{
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 40px;
     flex-wrap: wrap;
   }
@@ -161,6 +161,30 @@
   }
   p.intro a{ color: var(--text-muted); border-color: var(--rule); }
   p.intro a:hover{ color: var(--text); border-color: var(--text); }
+
+  .intro-list{
+    list-style: none;
+    margin: 0 0 22px;
+    padding: 0;
+    color: var(--text-muted);
+    font-size: 16px;
+  }
+  .intro-list li{
+    position: relative;
+    padding-left: 18px;
+    margin-bottom: 10px;
+    line-height: 1.6;
+  }
+  .intro-list li::before{
+    content: "–";
+    position: absolute;
+    left: 0;
+    color: var(--text-faint);
+  }
+  .intro-list strong{
+    color: var(--text);
+    font-weight: 600;
+  }
 
   .contact-line{
     font-size: 15px;
@@ -266,8 +290,8 @@
   @media (max-width: 560px){
     .row{ grid-template-columns: 1fr; }
     .row .years{ text-align: left; }
-    .hero-row{ flex-direction: column-reverse; text-align: center; }
-    .hero-photo img{ width: 128px; height: 128px; }
+    .hero-row{ gap: 20px; }
+    .hero-photo img{ width: 96px; height: 96px; }
   }
 </style>
 </head>
@@ -297,7 +321,8 @@
   <div class="wrap">
     <div class="hero-row">
       <div class="hero-text">
-        <p class="intro">Hi! I'm Avani. Last year, I graduated from <strong>Harvey Mudd College</strong> with a <strong>BS in Physics and Computer Science</strong>.</p>
+        <h1>Welcome!</h1>
+        <p class="intro">Hi! I'm Avani. Last year, I graduated from <strong>Harvey Mudd College</strong> with a <strong>BS in Physics and Computer Science</strong>. I'm passionate about the intersection of <strong>tech, science, and social impact</strong>.</p>
         <p class="group-label" style="margin: 22px 0 10px;">Highlights</p>
         <ul class="intro-list">
           <li><strong>Aurora Energy Research</strong> | Analyst</li>
@@ -307,7 +332,8 @@
           <li><strong>FICUS Lab</strong> | Climate Computation Researcher (under Prof. Sarah Kavassalis)</li>
           <li><strong>Gerbode Lab for Soft Matter Physics</strong> | Undergraduate Researcher (under Prof. Sharon Gerbode)</li>
         </ul>
-        <p class="intro" style="margin-top: 18px;">I'm passionate about the intersection of <strong>tech, science, and social impact</strong>. In my free time, I love being outdoors, singing, reading, and telling anti-jokes.</p>
+        <p class="intro" style="margin-top: 18px;">In my free time, I love being outdoors, singing, reading, and telling anti-jokes.</p>
+        <div class="contact-line">
           <a href="mailto:avaninanne@gmail.com">Email</a><span class="sep">·</span><a href="https://www.linkedin.com/in/avani-anne/" target="_blank" rel="noopener">LinkedIn</a><span class="sep">·</span><a href="https://github.com/avani-anne" target="_blank" rel="noopener">GitHub</a><span class="sep">·</span><a href="AvaniAnneWebsiteCV.pdf">Resume/CV</a>
         </div>
       </div>
